@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nocturne Deck</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="void-bg" aria-hidden="true">
+    <div class="nebula n1" data-depth="14"></div>
+    <div class="nebula n2" data-depth="24"></div>
+    <div class="nebula n3" data-depth="34"></div>
+    <div class="nebula n4" data-depth="44"></div>
+    <div class="starfield"></div>
+    <div id="cursorBloom" class="cursor-bloom"></div>
+  </div>
+
+  <main class="cockpit">
+    <button id="openSettings" class="system-btn micro-react entrance" data-order="0" type="button" aria-haspopup="dialog" aria-controls="settingsModal">
+      Control
+    </button>
+
+    <section class="core float entrance" data-order="1" data-depth="14">
+      <div class="core-inner magnetic">
+        <div class="clock-wrap" aria-live="polite">
+          <div class="clock" role="timer" aria-label="Current time">
+            <span class="clock-slot" id="clockHours">
+              <span class="digit current">00</span>
+              <span class="digit next">00</span>
+            </span>
+            <span class="clock-colon" aria-hidden="true">:</span>
+            <span class="clock-slot" id="clockMinutes">
+              <span class="digit current">00</span>
+              <span class="digit next">00</span>
+            </span>
+          </div>
+          <p class="dayline" id="dayLine"></p>
+        </div>
+
+        <form id="searchForm" class="search-ring micro-react" autocomplete="off">
+          <span id="engineLabel" class="engine-pill">DuckDuckGo</span>
+          <input id="searchInput" type="text" placeholder="Search or enter URL" spellcheck="false" aria-label="Search" autofocus />
+          <button type="submit" class="launch-btn micro-react">Launch</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="pod pod-bookmarks float entrance" data-order="2" data-depth="22">
+      <div class="pod-inner magnetic">
+        <header class="pod-head">
+          <h2>Pinned Orbit</h2>
+          <span class="pod-hint">Tap to open</span>
+        </header>
+
+        <div id="bookmarkGrid" class="bookmark-cluster"></div>
+      </div>
+    </section>
+
+    <section class="pod pod-calendar float entrance" data-order="3" data-depth="26">
+      <div class="pod-inner magnetic">
+        <header class="pod-head">
+          <h2 id="calendarTitle">Calendar</h2>
+          <div class="view-toggle" role="tablist" aria-label="Calendar view">
+            <button id="viewMonth" class="micro-react" type="button" role="tab" aria-selected="true">Month</button>
+          </div>
+        </header>
+
+        <div class="weekday-strip" aria-hidden="true">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+        <div id="calendarGridWrap" class="calendar-wrap">
+          <div id="calendarGrid" class="calendar-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pod pod-todo float entrance" data-order="4" data-depth="20">
+      <div class="pod-inner magnetic">
+        <header class="pod-head">
+          <h2>Momentum Queue</h2>
+        </header>
+
+        <form id="todoForm" class="todo-form">
+          <input id="todoInput" type="text" maxlength="120" placeholder="Add a task" aria-label="Add task" />
+          <button type="submit" class="micro-react">Add</button>
+        </form>
+        <ul id="todoList" class="todo-stream"></ul>
+      </div>
+    </section>
+
+    <section class="pod pod-scratch float entrance" data-order="5" data-depth="18">
+      <div class="pod-inner magnetic">
+        <header class="pod-head">
+          <h2>Scratchpad</h2>
+        </header>
+
+        <div class="scratch-shell micro-react">
+          <textarea id="scratchpad" placeholder="Write anything..." aria-label="Scratchpad"></textarea>
+          <div id="sparkLayer" class="spark-layer" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="settingsModal" class="settings-modal" aria-hidden="true">
+    <div class="settings-backdrop" data-close-settings></div>
+    <aside class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsHeading">
+      <header class="settings-head">
+        <h2 id="settingsHeading">Control Deck</h2>
+        <button id="closeSettings" class="text-btn micro-react" type="button">Close</button>
+      </header>
+
+      <section class="setting-block">
+        <label for="engineSelect">Default Search Engine</label>
+        <select id="engineSelect" class="micro-react">
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="google">Google</option>
+          <option value="bing">Bing</option>
+          <option value="brave">Brave</option>
+          <option value="kagi">Kagi</option>
+        </select>
+      </section>
+
+      <section class="setting-block">
+        <h3>Pinned Tabs</h3>
+        <form id="bookmarkForm" class="bookmark-form">
+          <input id="bookmarkTitle" type="text" maxlength="60" placeholder="Title" aria-label="Bookmark title" />
+          <input id="bookmarkUrl" type="url" maxlength="2048" placeholder="https://example.com" aria-label="Bookmark URL" />
+          <button type="submit" class="micro-react">Add</button>
+        </form>
+        <ul id="settingsBookmarkList" class="settings-list"></ul>
+      </section>
+    </aside>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

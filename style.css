@@ -1,0 +1,1195 @@
+:root {
+  --bg-0: #02040a;
+  --bg-1: #070d19;
+  --bg-2: #0b1628;
+  --ink-main: #ebf3ff;
+  --ink-soft: #9faed0;
+  --ink-faint: #7382a4;
+  --glass: rgba(10, 18, 36, 0.62);
+  --glass-strong: rgba(8, 13, 28, 0.76);
+  --border: rgba(172, 205, 255, 0.24);
+  --accent-cyan: #5de6ff;
+  --accent-pink: #ff6dbc;
+  --accent-violet: #8f7bff;
+  --accent-green: #6dfdb3;
+  --danger: #ff5f7e;
+  --radius-xl: 30px;
+  --radius-lg: 18px;
+  --shadow: 0 28px 56px rgba(0, 0, 0, 0.45), 0 2px 22px rgba(0, 0, 0, 0.25);
+  --spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink-main);
+  font-family: "Avenir Next", "SF Pro Text", "Segoe UI Variable", "Trebuchet MS", sans-serif;
+  background:
+    radial-gradient(circle at 15% -20%, rgba(94, 122, 255, 0.2), transparent 50%),
+    radial-gradient(circle at 96% 110%, rgba(255, 109, 188, 0.17), transparent 45%),
+    linear-gradient(155deg, var(--bg-0) 0%, var(--bg-1) 46%, var(--bg-2) 100%);
+  overflow: hidden;
+}
+
+.void-bg {
+  position: fixed;
+  inset: -18vh -12vw;
+  pointer-events: none;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.nebula {
+  position: absolute;
+  border-radius: 43% 57% 62% 38% / 58% 36% 64% 42%;
+  filter: blur(16px);
+  will-change: transform;
+}
+
+.n1 {
+  width: 56vmax;
+  height: 46vmax;
+  top: -28%;
+  left: -20%;
+  background: radial-gradient(circle at 35% 30%, rgba(94, 230, 255, 0.34), rgba(16, 27, 52, 0.06) 70%);
+}
+
+.n2 {
+  width: 48vmax;
+  height: 40vmax;
+  top: 2%;
+  right: -16%;
+  background: radial-gradient(circle at 60% 44%, rgba(255, 109, 188, 0.27), rgba(20, 14, 39, 0.04) 72%);
+}
+
+.n3 {
+  width: 44vmax;
+  height: 34vmax;
+  bottom: -22%;
+  left: 18%;
+  background: radial-gradient(circle at 42% 52%, rgba(141, 123, 255, 0.24), rgba(17, 26, 44, 0.04) 74%);
+}
+
+.n4 {
+  width: 42vmax;
+  height: 32vmax;
+  bottom: -14%;
+  right: 8%;
+  background: radial-gradient(circle at 44% 40%, rgba(109, 253, 179, 0.22), rgba(12, 24, 34, 0.04) 74%);
+}
+
+.starfield {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(rgba(212, 232, 255, 0.52) 0.65px, transparent 0.65px),
+    radial-gradient(rgba(116, 151, 210, 0.4) 0.5px, transparent 0.5px);
+  background-size: 4px 4px, 6px 6px;
+  background-position: 0 0, 2px 2px;
+}
+
+.cursor-bloom {
+  position: absolute;
+  width: 34vmax;
+  height: 34vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(128, 219, 255, 0.2), rgba(128, 219, 255, 0.05) 42%, transparent 72%);
+  opacity: 0.84;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.cockpit {
+  position: relative;
+  width: min(1800px, 100vw);
+  margin: 0 auto;
+  height: 100vh;
+  isolation: isolate;
+  --edge-x: clamp(24px, 1.8vw, 34px);
+  --edge-y: clamp(72px, 8vh, 96px);
+  --edge-bottom: clamp(24px, 2.4vh, 34px);
+  --gap: clamp(16px, 1.25vw, 24px);
+  --left-col: min(24vw, 360px);
+  --right-col: min(29vw, 440px);
+  --row-top-h: min(44vh, 390px);
+}
+
+.float {
+  position: absolute;
+  --float-x: 0px;
+  --float-y: 0px;
+  transform: translate3d(var(--float-x), var(--float-y), 0);
+  will-change: transform;
+}
+
+.system-btn {
+  position: absolute;
+  top: clamp(22px, 2.8vh, 34px);
+  left: var(--edge-x);
+  right: auto;
+  z-index: 9;
+  border: 1px solid rgba(140, 188, 255, 0.42);
+  border-radius: 999px;
+  background: linear-gradient(140deg, rgba(14, 26, 50, 0.92), rgba(8, 16, 31, 0.9));
+  color: #d7e9ff;
+  padding: 0.64rem 1rem;
+  font: 700 0.72rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.core {
+  top: var(--edge-y);
+  left: calc(var(--edge-x) + var(--left-col) + var(--gap));
+  right: calc(var(--edge-x) + var(--right-col) + var(--gap));
+  height: var(--row-top-h);
+  width: auto;
+  z-index: 5;
+}
+
+.pod {
+  z-index: 4;
+}
+
+.pod-bookmarks {
+  top: var(--edge-y);
+  left: var(--edge-x);
+  bottom: var(--edge-bottom);
+  width: var(--left-col);
+  height: auto;
+}
+
+.pod-calendar {
+  top: var(--edge-y);
+  right: var(--edge-x);
+  width: var(--right-col);
+  height: var(--row-top-h);
+}
+
+.pod-todo {
+  top: calc(var(--edge-y) + var(--row-top-h) + var(--gap));
+  right: var(--edge-x);
+  bottom: var(--edge-bottom);
+  width: var(--right-col);
+  height: auto;
+}
+
+.pod-scratch {
+  top: calc(var(--edge-y) + var(--row-top-h) + var(--gap));
+  left: calc(var(--edge-x) + var(--left-col) + var(--gap));
+  right: calc(var(--edge-x) + var(--right-col) + var(--gap));
+  bottom: var(--edge-bottom);
+  width: auto;
+  height: auto;
+}
+
+.core-inner,
+.pod-inner,
+.settings-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(145deg, rgba(25, 40, 72, 0.42), rgba(11, 19, 36, 0.4)),
+    var(--glass);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  overflow: hidden;
+}
+
+.core-inner::before,
+.pod-inner::before,
+.settings-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(560px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.17), transparent 62%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.magnetic {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 0px;
+  --my: 0px;
+  --gx: 50%;
+  --gy: 50%;
+  transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--mx), var(--my), 0);
+  transform-style: preserve-3d;
+  transition: transform 300ms var(--spring);
+}
+
+.magnetic.is-reacting {
+  transition-duration: 95ms;
+}
+
+.magnetic.is-reacting::before,
+.micro-react.is-reacting::after {
+  opacity: 1;
+}
+
+.micro-react {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 0px;
+  --my: 0px;
+  --gx: 50%;
+  --gy: 50%;
+  position: relative;
+  transform: perspective(860px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--mx), var(--my), 0);
+  transition: transform 260ms var(--spring), border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.micro-react::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.25), transparent 65%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.clock-wrap {
+  padding: 1.3rem 1.2rem 0.6rem;
+  text-align: center;
+}
+
+.clock {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.2em;
+  font-family: "Bodoni MT", "Didot", "Iowan Old Style", "Times New Roman", serif;
+  font-size: clamp(2.7rem, 7.8vw, 6.9rem);
+  line-height: 0.92;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: #f2f7ff;
+}
+
+.clock-slot {
+  position: relative;
+  width: 2.13ch;
+  height: 1em;
+  overflow: hidden;
+}
+
+.clock-slot .digit {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: transform 560ms var(--spring), opacity 560ms var(--spring), filter 560ms var(--spring);
+}
+
+.clock-slot .next {
+  transform: translateY(102%);
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.clock-slot.flip .current {
+  transform: translateY(-102%);
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.clock-slot.flip .next {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+.clock-colon {
+  color: color-mix(in oklab, var(--accent-cyan), #dfeeff 35%);
+  animation: pulse-colon 1.55s ease-in-out infinite;
+}
+
+@keyframes pulse-colon {
+  0%,
+  100% {
+    opacity: 0.54;
+    transform: scale(0.96);
+  }
+
+  45% {
+    opacity: 1;
+    transform: scale(1.09);
+  }
+}
+
+.dayline {
+  margin: 0.6rem 0 0;
+  color: #9fb0d4;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.search-ring {
+  margin: 0.5rem 0.92rem 0.92rem;
+  min-height: 70px;
+  border: 1px solid rgba(131, 177, 252, 0.3);
+  border-radius: 999px;
+  background: linear-gradient(140deg, rgba(10, 20, 41, 0.84), rgba(14, 11, 34, 0.82));
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.64rem;
+  align-items: center;
+  padding: 0.56rem;
+}
+
+.engine-pill {
+  border: 1px solid rgba(138, 192, 255, 0.34);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(57, 85, 129, 0.4), rgba(23, 38, 72, 0.4));
+  color: #cae2ff;
+  font: 700 0.64rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.53rem 0.78rem;
+}
+
+#searchInput {
+  width: 100%;
+  border: 0;
+  outline: none;
+  border-radius: 999px;
+  background: rgba(9, 18, 38, 0.6);
+  color: #ebf3ff;
+  padding: 0.8rem 0.98rem;
+  font: 600 0.98rem/1.2 "Avenir Next", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+#searchInput::placeholder {
+  color: #8194bd;
+}
+
+#searchInput:focus {
+  box-shadow: inset 0 0 0 1px rgba(92, 228, 255, 0.46), 0 0 0 4px rgba(92, 228, 255, 0.13);
+}
+
+.launch-btn {
+  border: 1px solid rgba(105, 171, 255, 0.42);
+  border-radius: 999px;
+  cursor: pointer;
+  color: #0b1833;
+  font: 800 0.76rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  min-width: 86px;
+  padding: 0.76rem 0.9rem;
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.95), rgba(255, 109, 188, 0.86));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+.pod-inner {
+  padding: 0.92rem;
+}
+
+.pod-head,
+.pod-subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pod-head h2,
+.pod-subhead h3 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: #d9e9ff;
+}
+
+.pod-head h2 {
+  font-size: 0.82rem;
+}
+
+.pod-hint {
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.text-btn {
+  border: 0;
+  border-radius: 9px;
+  background: rgba(13, 24, 44, 0.72);
+  color: #9ec8ff;
+  font: 700 0.67rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.42rem 0.55rem;
+  cursor: pointer;
+}
+
+.text-btn:hover {
+  color: #d2e8ff;
+}
+
+.bookmark-cluster {
+  margin-top: 0.72rem;
+  height: calc(100% - 2.2rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.62rem;
+  align-content: start;
+  overflow: auto;
+  padding-right: 0.14rem;
+}
+
+.bookmark-card {
+  position: relative;
+  border: 1px solid rgba(152, 191, 255, 0.35);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 100% -10%, rgba(95, 228, 255, 0.2), transparent 45%),
+    linear-gradient(145deg, rgba(13, 26, 50, 0.9), rgba(16, 10, 37, 0.8));
+  padding: 0.72rem 0.72rem 0.78rem;
+  display: grid;
+  gap: 0.42rem;
+  min-height: 112px;
+  text-align: left;
+  color: #d7e7ff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.bookmark-card:hover {
+  border-color: rgba(134, 230, 255, 0.62);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.bookmark-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% 0 auto;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(93, 230, 255, 0.55), rgba(255, 109, 188, 0.45), transparent 80%);
+}
+
+.bookmark-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bookmark-visual {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(150, 188, 248, 0.38);
+  background: rgba(13, 26, 49, 0.9);
+}
+
+.bookmark-favicon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.bookmark-fallback {
+  width: 100%;
+  height: 100%;
+  display: none;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.86), rgba(255, 109, 188, 0.78));
+  color: #00142f;
+  font: 800 0.76rem/1 "Avenir Next", sans-serif;
+}
+
+.bookmark-card.no-favicon .bookmark-favicon {
+  display: none;
+}
+
+.bookmark-card.no-favicon .bookmark-fallback {
+  display: grid;
+}
+
+.bookmark-arrow {
+  color: #99bde9;
+  font-size: 0.88rem;
+}
+
+.bookmark-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-top: 0.04rem;
+}
+
+.bookmark-host {
+  color: #88a0cc;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookmark-empty {
+  grid-column: 1 / -1;
+  border: 1px dashed rgba(138, 171, 230, 0.44);
+  border-radius: 14px;
+  padding: 0.74rem;
+  color: #87a0cb;
+  font-size: 0.8rem;
+}
+
+.view-toggle {
+  display: inline-flex;
+  gap: 0.35rem;
+  padding: 0.24rem;
+  border: 1px solid rgba(137, 171, 233, 0.3);
+  border-radius: 999px;
+  background: rgba(9, 18, 35, 0.76);
+}
+
+.view-toggle button {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #8ea5cd;
+  padding: 0.35rem 0.66rem;
+  font: 700 0.66rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.view-toggle button.is-active {
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.34), rgba(255, 109, 188, 0.3));
+  color: #def0ff;
+}
+
+.weekday-strip {
+  margin-top: 0.68rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.34rem;
+  color: #7f95bf;
+  font-size: 0.69rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.weekday-strip span {
+  text-align: center;
+}
+
+.calendar-wrap {
+  margin-top: 0.45rem;
+  overflow: hidden;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.34rem;
+}
+
+.calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.34rem;
+}
+
+.calendar-week.extra {
+  animation: week-arrive 560ms var(--spring) both;
+}
+
+.calendar-week.extra.d1 {
+  animation-delay: 70ms;
+}
+
+.calendar-week.extra.d2 {
+  animation-delay: 140ms;
+}
+
+.calendar-week.extra.d3 {
+  animation-delay: 210ms;
+}
+
+@keyframes week-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.day-cell {
+  min-height: 38px;
+  border: 1px solid rgba(138, 171, 229, 0.3);
+  border-radius: 11px;
+  background: rgba(10, 18, 35, 0.66);
+  display: grid;
+  place-items: center;
+  font: 700 0.8rem/1 "Avenir Next", sans-serif;
+  color: #d4e5ff;
+}
+
+.day-cell:hover {
+  border-color: rgba(104, 225, 255, 0.64);
+  box-shadow: inset 0 0 0 1px rgba(108, 225, 255, 0.38);
+}
+
+.day-cell.muted {
+  color: #778cb5;
+  border-color: rgba(111, 132, 173, 0.26);
+}
+
+.day-cell.today {
+  border-color: rgba(103, 229, 255, 0.75);
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.24), rgba(255, 109, 188, 0.2));
+  box-shadow: 0 0 16px rgba(83, 210, 255, 0.25);
+}
+
+.todo-form {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.48rem;
+}
+
+.todo-form input,
+.todo-form button {
+  border-radius: 12px;
+  border: 1px solid rgba(138, 171, 230, 0.34);
+  background: rgba(10, 19, 38, 0.7);
+  color: #d9e9ff;
+  font: 650 0.82rem/1.2 "Avenir Next", sans-serif;
+}
+
+.todo-form input {
+  padding: 0.62rem 0.72rem;
+  outline: none;
+}
+
+.todo-form input:focus {
+  border-color: rgba(98, 226, 255, 0.58);
+}
+
+.todo-form button {
+  cursor: pointer;
+  padding: 0 0.78rem;
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.26), rgba(255, 109, 188, 0.25));
+}
+
+.todo-stream {
+  list-style: none;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.38rem;
+}
+
+.todo-item {
+  list-style: none;
+}
+
+.todo-row {
+  border: 1px solid rgba(138, 170, 226, 0.32);
+  border-radius: 13px;
+  background: rgba(10, 18, 36, 0.68);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.48rem;
+  align-items: center;
+  padding: 0.48rem 0.52rem;
+}
+
+.todo-row:hover {
+  border-color: rgba(104, 225, 255, 0.58);
+}
+
+.todo-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 173, 230, 0.52);
+  background: rgba(9, 17, 33, 0.9);
+  cursor: pointer;
+  position: relative;
+}
+
+.todo-check::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  transform: scale(0);
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.96), rgba(255, 109, 188, 0.9));
+  transition: transform 300ms var(--spring);
+}
+
+.todo-text {
+  position: relative;
+  font-size: 0.84rem;
+  color: #d6e7ff;
+  overflow-wrap: anywhere;
+}
+
+.todo-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 52%;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, rgba(93, 230, 255, 0.95), rgba(255, 109, 188, 0.92));
+  transition: transform 360ms var(--spring);
+}
+
+.todo-delete {
+  border: 0;
+  border-radius: 9px;
+  background: rgba(255, 95, 126, 0.18);
+  color: #ff90aa;
+  cursor: pointer;
+  font: 700 0.7rem/1 "Avenir Next", sans-serif;
+  letter-spacing: 0.03em;
+  padding: 0.31rem 0.46rem;
+}
+
+.todo-item.done .todo-check::after {
+  transform: scale(1);
+}
+
+.todo-item.done .todo-text {
+  color: #90a3ca;
+}
+
+.todo-item.done .todo-text::after {
+  transform: scaleX(1);
+}
+
+.todo-empty {
+  border: 1px dashed rgba(129, 153, 200, 0.5);
+  border-radius: 12px;
+  padding: 0.64rem;
+  color: #7c90b8;
+  font-size: 0.8rem;
+}
+
+.todo-item.deleting .todo-row {
+  border-color: rgba(255, 98, 127, 0.58);
+  background: rgba(117, 30, 53, 0.36);
+}
+
+.scratch-shell {
+  margin-top: 0.66rem;
+  position: relative;
+  border: 1px solid rgba(137, 171, 230, 0.3);
+  border-radius: 17px;
+  background: rgba(10, 19, 38, 0.7);
+  min-height: 128px;
+  max-height: 172px;
+  overflow: hidden;
+}
+
+#scratchpad {
+  width: 100%;
+  min-height: 126px;
+  max-height: 172px;
+  resize: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #e3edff;
+  padding: 0.74rem 0.8rem;
+  font: 500 0.9rem/1.42 "Iowan Old Style", "Book Antiqua", serif;
+  caret-color: #60e8ff;
+}
+
+#scratchpad::placeholder {
+  color: #7f95be;
+}
+
+#scratchpad:focus {
+  box-shadow: inset 0 0 0 1px rgba(94, 230, 255, 0.5);
+}
+
+.spark-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(102, 236, 255, 0.84), rgba(102, 236, 255, 0.11) 60%, transparent 75%);
+  animation: spark-fade 620ms ease-out forwards;
+}
+
+@keyframes spark-fade {
+  0% {
+    opacity: 0.84;
+    transform: scale(0.34);
+  }
+
+  58% {
+    opacity: 0.34;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.settings-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.settings-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 8, 16, 0.56);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.settings-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(450px, 92vw);
+  height: 100%;
+  border-radius: 24px 0 0 24px;
+  background:
+    linear-gradient(155deg, rgba(20, 33, 60, 0.88), rgba(8, 14, 29, 0.92)),
+    var(--glass-strong);
+  transform: translateX(100%);
+  transition: transform 360ms var(--spring);
+  padding: 1rem;
+  overflow: auto;
+}
+
+.settings-modal.open {
+  pointer-events: auto;
+}
+
+.settings-modal.open .settings-backdrop {
+  opacity: 1;
+}
+
+.settings-modal.open .settings-panel {
+  transform: translateX(0);
+}
+
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-head h2,
+.setting-block h3 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #d7e9ff;
+}
+
+.settings-head h2 {
+  font-size: 0.88rem;
+}
+
+.setting-block {
+  margin-top: 0.88rem;
+  border: 1px solid rgba(141, 175, 236, 0.3);
+  border-radius: 16px;
+  padding: 0.72rem;
+  background: rgba(9, 17, 34, 0.75);
+}
+
+.setting-block label,
+.setting-block h3 {
+  display: block;
+  margin-bottom: 0.44rem;
+  color: #9ab2dc;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#engineSelect,
+.bookmark-form input,
+.bookmark-form button,
+.remove-bookmark {
+  border-radius: 12px;
+  border: 1px solid rgba(141, 175, 236, 0.34);
+  background: rgba(9, 18, 35, 0.8);
+  color: #d8e8ff;
+  font: 650 0.82rem/1.2 "Avenir Next", sans-serif;
+}
+
+#engineSelect {
+  width: 100%;
+  padding: 0.62rem 0.66rem;
+  outline: none;
+}
+
+#engineSelect:focus,
+.bookmark-form input:focus {
+  border-color: rgba(95, 228, 255, 0.58);
+}
+
+.bookmark-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.38rem;
+}
+
+.bookmark-form input {
+  padding: 0.6rem 0.64rem;
+  outline: none;
+}
+
+.bookmark-form button {
+  grid-column: 1 / -1;
+  width: 100%;
+  cursor: pointer;
+  min-height: 38px;
+  padding: 0 0.9rem;
+  background: linear-gradient(145deg, rgba(93, 230, 255, 0.28), rgba(255, 109, 188, 0.24));
+}
+
+.settings-list {
+  margin: 0.66rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.36rem;
+}
+
+.settings-item {
+  border: 1px solid rgba(136, 170, 230, 0.3);
+  border-radius: 12px;
+  background: rgba(9, 18, 36, 0.74);
+  padding: 0.5rem 0.56rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.42rem;
+  align-items: center;
+}
+
+.settings-main {
+  min-width: 0;
+}
+
+.settings-main strong,
+.settings-main small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.settings-main strong {
+  color: #d5e6ff;
+  font-size: 0.8rem;
+}
+
+.settings-main small {
+  margin-top: 0.1rem;
+  color: #7f95c0;
+  font-size: 0.72rem;
+}
+
+.remove-bookmark {
+  cursor: pointer;
+  padding: 0.3rem 0.46rem;
+  border-radius: 9px;
+  background: rgba(255, 95, 126, 0.18);
+  color: #ff9cb1;
+  font-size: 0.72rem;
+}
+
+.settings-empty {
+  border: 1px dashed rgba(128, 153, 200, 0.46);
+  border-radius: 12px;
+  padding: 0.58rem;
+  color: #7f93bc;
+  font-size: 0.78rem;
+}
+
+.entrance {
+  opacity: 0;
+  transform: translateY(44px) scale(0.94);
+  filter: blur(8px);
+}
+
+.entrance.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    transform 900ms var(--spring),
+    opacity 620ms ease,
+    filter 900ms var(--spring);
+}
+
+body.search-focus .pod,
+body.search-focus .system-btn {
+  filter: blur(2px) brightness(0.72);
+}
+
+body.search-focus .core-inner {
+  box-shadow: 0 0 0 1px rgba(103, 229, 255, 0.46), 0 28px 70px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 1220px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .cockpit {
+    height: auto;
+    min-height: 100vh;
+    display: grid;
+    gap: 0.8rem;
+    padding: 1.1rem 0.9rem 1.4rem;
+  }
+
+  .system-btn,
+  .core,
+  .pod {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .system-btn {
+    justify-self: end;
+    z-index: 8;
+  }
+
+  .core {
+    width: 100%;
+  }
+
+  .core-inner {
+    min-height: 320px;
+  }
+
+  .pod-bookmarks {
+    min-height: 520px;
+  }
+
+  .pod-calendar,
+  .pod-todo,
+  .pod-scratch {
+    min-height: 300px;
+  }
+
+  .scratch-shell,
+  #scratchpad {
+    max-height: 260px;
+  }
+}
+
+@media (max-width: 760px) {
+  .bookmark-cluster {
+    grid-template-columns: 1fr;
+  }
+
+  .search-ring {
+    grid-template-columns: 1fr;
+    border-radius: 22px;
+    min-height: 0;
+  }
+
+  .engine-pill,
+  .launch-btn {
+    justify-self: start;
+  }
+
+  .bookmark-form {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-week,
+  .weekday-strip {
+    gap: 0.24rem;
+  }
+
+  .day-cell {
+    min-height: 34px;
+    font-size: 0.72rem;
+  }
+
+  .settings-panel {
+    width: 100vw;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
+  .entrance {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
